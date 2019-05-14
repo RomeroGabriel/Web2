@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>User login</title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="box">
+                <h3>Register a new user</h3>
+                <div class="form">
+                    <form action="/users/createUser" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input required name="email" type="email" id="email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password*</label>
+                            <input required name="password" type="password" id="password" placeholder="Password">
+                        </div>
+                        <% if(error.length > 0) {%>
+                            <h4 class="emailExist">Email already in use</h4>
+                        <%}%>
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+                <a style="margin-top:1em;" href="/users/login">Back to login</a>
+            </div>
+        </div>
+    </body>
+</html>

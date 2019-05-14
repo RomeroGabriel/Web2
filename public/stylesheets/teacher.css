@@ -1,0 +1,50 @@
+.container {
+    flex-flow: column wrap;
+    background-color: #FFD54F;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container2 {
+    flex-flow: column wrap;
+    background-color: #FFD54F;
+    height: 100%;
+    display: flex;
+}
+
+.box {
+    background-color: #FFE0B2;
+}
+
+.form-group label {
+    padding-right: 7px;
+}
+
+.form button {
+    width: 100%;
+}
+
+.faixa {
+    justify-content: flex-start;
+}
+
+.content {
+    margin: 2em 4em;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.content h3 {
+    align-self: center;
+}
+
+.itens{
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 1em;
+    justify-content: space-between;
+}

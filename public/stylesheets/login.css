@@ -1,0 +1,17 @@
+.container {
+    flex-flow: column wrap;
+    background-color: gray;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.newUser {
+    align-self: flex-end;
+    margin-top: 1em;
+}

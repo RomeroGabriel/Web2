@@ -1,0 +1,39 @@
+.container {
+    flex-flow: column wrap;
+    background-color: #FFD54F;
+}
+
+.faixa {
+    justify-content: flex-end;
+}
+
+.content {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.creates {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 1em;
+    width: 100%;
+    background-color: #FFE0B2;
+    justify-content: space-around;
+    border-radius: 11px;
+}
+
+.list {
+    margin-top: 2em;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.itens {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 1em 2em;
+    padding: 1em 0;
+}

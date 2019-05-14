@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>New orientation</title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/teacher.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="box">
+                <h3>Register a new orientation</h3>
+                <div class="form">
+                    <form action="/orientation/create" method="POST">
+                        <div class="form-group">
+                            <label for="thema">Thema*</label>
+                            <input required name="thema" type="text" id="thema" placeholder="Enter the teacher's name">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentName">Student Name*</label>
+                            <input required name="studentName" type="text" id="studentName" placeholder="Enter student name">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher">Teacher*</label>
+                            <select required name="teacher">
+                                <% if(!list || list.length == 0) {%>
+                                    <option disabled >No teachers</option>
+                                <% } else { %>
+                                    <% for (i of list) { %>
+                                        <option value="<%= i._id %>" ><%= i.name %></option>
+                                    <% } %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <% if(message.length > 0) {%>
+                          <h4 class="emailExist"><%= message%></h4>
+                        <%}%>
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+                <a style="margin-top:1em;" href="/">Back</a>
+            </div>
+        </div>
+    </body>
+</html>
