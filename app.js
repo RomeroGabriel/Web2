@@ -49,7 +49,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mongoose.connect('mongodb://localhost:27017/web2', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://romero:romero123@cluster0-sbrv8.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'ERRO CONEXÃO BD'));
 
