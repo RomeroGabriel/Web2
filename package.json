@@ -16,6 +16,9 @@
     "mongoose": "^5.5.6",
     "morgan": "~1.9.0"
   },
+  "engines": {
+    "node": "8.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/RomeroGabriel/Web2"
