@@ -10,12 +10,12 @@ module.exports = {
                 password: req.body.password
             });
             user.save().then(result => {
-                return res.redirect('/users/login');
+                return res.status(200);
             }, err => {
-                if (err) { return res.status(500).json({ message: 'Error in register new user', error: err }) };
+                return res.status(500).json({ message: 'Error in register new user', error: err });
             });
         } else {
-            res.render('newUser', { error: 'Email already use by another user!' });
+            return res.status(500);
         }
     },
 
@@ -25,9 +25,9 @@ module.exports = {
         let user = await userModel.find({ email: email, password: password });
         if (user.length > 0) {
             res.cookie('login', email);
-            return res.redirect('/');
+            return res.status(200);
         } else {
-            res.render('login', { message: 'Email or password wrong!' });
+            res.status(500).json({ sucess: false, message: 'Email or password wrong!' });
         }
     },
 };

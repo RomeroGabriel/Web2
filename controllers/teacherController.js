@@ -10,29 +10,29 @@ module.exports = {
                 department: req.body.department,
             });
             teacher.save().then(result => {
-                return res.redirect('/');
+                return res.json({ sucess: true });
             }, err => {
-                if (err) { return res.status(500).json({ message: 'Error in register new teacher', error: err }) };
+                return res.status(500);
             });
-        } else {
-            res.render('newTeacher', { message: 'Email already use by another teacher!' })
-        }
+        } else 
+            return res.json({ sucess: false, message: 'Email já em uso' });
+        
     },
 
-    listAll: function (req, res) {
+    getAll: function (req, res) {
         teacherModel.find().then(result => {
-            res.render('listTeacher', { list: result, message: '' })
+            return res.json(result);
         }, err => {
-            res.render('listTeacher', { list: [], message: 'Error in list all teachers' });
+            return res.status(500);
         });
     },
 
     delete: function(req, res){
         let id = req.params.id;
         teacherModel.findByIdAndRemove(id).then(result => {
-            return res.redirect('/teacher/list');
+            return res.status(200);
         }, err => {
-            res.render('listTeacher', { list: [], message: 'Error, can not delete teacher!' });
+            return res.status(500);
         });
     }
 }

@@ -1,5 +1,4 @@
 var orientationModel = require('../models/orientation');
-var teacherModel = require('../models/teacher');
 
 module.exports = {
     save: function (req, res) {
@@ -9,17 +8,9 @@ module.exports = {
             teacher: req.body.teacher
         });
         orientation.save().then(result => {
-            return res.redirect('/');
+            return res.status(200);
         }, err => {
-            res.render('newOrientation', { list: [], message: 'Error in save new orientation!' });
-        });
-    },
-
-    getInit: function (req, res) {
-        teacherModel.find().then(result => {
-            res.render('newOrientation', { list: result, message: '' });
-        }, err => {
-            res.render('newOrientation', { list: [], message: '' });
+            return res.status(500);
         });
     },
 
@@ -38,23 +29,18 @@ module.exports = {
             { $unwind: '$teacherName' },
             { $project: { thema: 1, _id: 1, studentName: 1, teacherName: 1 } }
         ]).then(result => {
-            res.render('paginaInicial', { list: result, message: '' })
+            return res.json(result);
         }, err => {
-            res.render('paginaInicial', { list: [], message: 'Error getting orientations' })
+            return res.status(500);
         })
-        // orientationModel.find().then(result => {
-        //     res.render('paginaInicial', { list: result, message: '' })
-        // }, err => {
-        //     res.render('paginaInicial', { list: [], message: 'Error getting orientations' })
-        // });
     },
 
     delete: function (req, res) {
         let id = req.params.id;
         orientationModel.findByIdAndRemove(id).then(result => {
-            return res.redirect('/');
+            return res.status(200);
         }, err => {
-            res.render('paginaInicial', { list: [], message: 'Error, can not delete orientation!' });
+            return res.status(500);
         });
     }
 };
