@@ -20,6 +20,7 @@ module.exports = {
     },
 
     login: async function (req, res) {
+        console.log(req.body)
         let email = req.body.email;
         let password = req.body.password;
         let user = await userModel.find({ email: email, password: password });

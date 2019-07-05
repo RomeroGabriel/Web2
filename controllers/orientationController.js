@@ -15,7 +15,6 @@ module.exports = {
     },
 
     getAll: function (req, res) {
-
         orientationModel.aggregate([
             {
                 $lookup:
