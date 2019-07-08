@@ -1,8 +1,8 @@
 var userModel = require('../models/user');
+var jwt = require('jsonwebtoken');
 
 module.exports = {
     save: async function (req, res) {
-
         let userEmail = await userModel.find({ email: req.body.email });
         if (!userEmail.length > 0) {
             let user = new userModel({
@@ -10,25 +10,23 @@ module.exports = {
                 password: req.body.password
             });
             user.save().then(result => {
-                return res.status(200);
+                return res.json({ suces: true, result: result });
             }, err => {
-                return res.status(500).json({ message: 'Error in register new user', error: err });
+                return res.status(500).json({ error: 'Inserir senha ou email' });
             });
-        } else {
-            return res.status(500);
-        }
+        } else
+            return res.status(500).json({ error: 'Email já usado' });
+
     },
 
     login: async function (req, res) {
-        console.log(req.body)
         let email = req.body.email;
         let password = req.body.password;
         let user = await userModel.find({ email: email, password: password });
         if (user.length > 0) {
-            res.cookie('login', email);
-            return res.status(200);
-        } else {
-            res.status(500).json({ sucess: false, message: 'Email or password wrong!' });
+            const token = jwt.sign({ email }, 'corinthians');
+            return res.json({ token });
         }
+        return res.status(500).json({ error: 'Falha no login' });
     },
 };

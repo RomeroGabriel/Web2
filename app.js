@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var teachersRouter = require('./routes/teacher');
 var orientationRouter = require('./routes/orientation');
 var cors = require('cors');
+var jwt = require('jsonwebtoken');
 var router = express.Router();
 var app = express();
 
@@ -20,10 +21,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 router.use(function (req, res, next) {
-  if (!req.cookies.login) {
-    return res.status(401).send('Sem cookie');
+  try {
+    const localToken = req.headers.authorization;
+    jwt.verify(localToken, 'corinthians');
+    next();
+  } catch (e) {
+    return res.status(401).json({ error: 'Falha na autenticação' })
   }
-  next();
 });
 app.use('/users', usersRouter);
 app.use(router);
