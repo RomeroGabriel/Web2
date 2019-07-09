@@ -29,8 +29,9 @@ module.exports = {
 
     delete: function(req, res){
         let id = req.params.id;
+        console.log(id);
         teacherModel.findByIdAndRemove(id).then(result => {
-            return res.status(200);
+            return res.json(result);
         }, err => {
             return res.status(500);
         });
