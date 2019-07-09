@@ -2,13 +2,19 @@ var orientationModel = require('../models/orientation');
 
 module.exports = {
     save: function (req, res) {
+        let thema = req.body.thema;
+        let studentName = req.body.studentName;
+        let teacher = req.body.teacher;
+        if (thema == '' || studentName == '' || teacher == '')
+            return res.status(500).json({ msg: 'Faltou informação' });
+
         let orientation = new orientationModel({
-            thema: req.body.thema,
-            studentName: req.body.studentName,
-            teacher: req.body.teacher
+            thema: thema,
+            studentName: studentName,
+            teacher: teacher
         });
         orientation.save().then(result => {
-            return res.status(200);
+            return res.json({ sucess: true });
         }, err => {
             return res.status(500);
         });
@@ -36,8 +42,8 @@ module.exports = {
 
     delete: function (req, res) {
         let id = req.params.id;
-        orientationModel.findByIdAndRemove(id).then(result => {
-            return res.status(200);
+        orientationModel.findOneAndDelete(id).then(result => {
+            return res.json(result);
         }, err => {
             return res.status(500);
         });
